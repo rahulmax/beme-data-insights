@@ -25,6 +25,12 @@ const reports = [
     href: '/level-3',
     tag: 'Level 3',
   },
+  {
+    title: 'Behavioural Analysis',
+    description: 'Deep behavioural arc tracking emotional regulation, social confidence, self-direction, and physical confidence over 3 years',
+    href: '/behavioural',
+    tag: 'Behavioural',
+  },
 ]
 
 export default function Home() {
