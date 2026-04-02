@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BeMe Observation Report — Venbha P</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAF8;
+    --surface: #FFFFFF;
+    --border: #E8E6E1;
+    --text-primary: #1A1A18;
+    --text-secondary: #6B6960;
+    --text-muted: #9B9890;
+    --accent-learning: #2563EB;
+    --accent-skills: #D97706;
+    --accent-self: #7C3AED;
+    --accent-relationships: #DC2626;
+    --accent-community: #059669;
+    --accent-general: #9B9890;
+    --learning-bg: #EFF6FF;
+    --skills-bg: #FFFBEB;
+    --self-bg: #F5F3FF;
+    --relationships-bg: #FEF2F2;
+    --community-bg: #ECFDF5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* Header */
+  .report-header {
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .report-header .meta {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .report-header h1 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+  }
+
+  .report-header .subtitle {
+    font-size: 15px;
+    color: var(--text-secondary);
+    max-width: 640px;
+  }
+
+  /* Section */
+  .section {
+    margin-bottom: 48px;
+  }
+
+  .section h2 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .section .section-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+  }
+
+  /* Summary cards */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+
+  .stat-card .stat-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+
+  .stat-card .stat-value {
+    font-family: 'Source Serif 4', serif;
+    font-size: 28px;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+
+  .stat-card .stat-detail {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+
+  /* Category legend */
+  .category-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding: 14px 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  /* Monthly table */
+  .monthly-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 14px;
+  }
+
+  .monthly-table th {
+    text-align: left;
+    padding: 12px 14px;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 600;
+    border-bottom: 1px solid var(--border);
+    background: #F7F7F5;
+  }
+
+  .monthly-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+
+  .monthly-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .monthly-table .month-name {
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .bar-cell {
+    width: 100%;
+  }
+
+  .bar-container {
+    display: flex;
+    height: 22px;
+    border-radius: 4px;
+    overflow: hidden;
+    gap: 1px;
+  }
+
+  .bar-segment {
+    height: 100%;
+    min-width: 2px;
+    transition: opacity 0.2s;
+  }
+
+  .bar-segment:hover {
+    opacity: 0.75;
+  }
+
+  .count-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-align: center;
+    min-width: 28px;
+  }
+
+  .total-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  /* Observer table */
+  .observer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+  }
+
+  .observer-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+
+  .observer-card .name {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .observer-card .count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--accent-learning);
+  }
+
+  .observer-card .label {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* Category deep dive */
+  .cat-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .cat-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+    border-left: 4px solid;
+  }
+
+  .cat-card.learning { background: var(--learning-bg); border-left-color: var(--accent-learning); }
+  .cat-card.skills { background: var(--skills-bg); border-left-color: var(--accent-skills); }
+  .cat-card.self { background: var(--self-bg); border-left-color: var(--accent-self); }
+  .cat-card.relationships { background: var(--relationships-bg); border-left-color: var(--accent-relationships); }
+  .cat-card.community { background: var(--community-bg); border-left-color: var(--accent-community); }
+
+  .cat-card h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .cat-card .cat-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .cat-card .cat-pct {
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+
+  .cat-card .cat-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+
+  /* Standardization section */
+  .schema-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  .schema-header {
+    padding: 14px 18px;
+    background: #F7F7F5;
+    border-bottom: 1px solid var(--border);
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .schema-body {
+    padding: 18px;
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 140px 100px 1fr;
+    gap: 12px;
+    padding: 8px 0;
+    font-size: 13px;
+    border-bottom: 1px solid #F0EEE9;
+  }
+
+  .field-row:last-child {
+    border-bottom: none;
+  }
+
+  .field-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--accent-learning);
+  }
+
+  .field-type {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .field-desc {
+    color: var(--text-secondary);
+  }
+
+  /* Issues list */
+  .issue-list {
+    list-style: none;
+  }
+
+  .issue-list li {
+    padding: 12px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .issue-list li strong {
+    color: var(--accent-learning);
+  }
+
+  .issue-label {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 6px;
+  }
+
+  .issue-label.critical { background: #FEE2E2; color: #991B1B; }
+  .issue-label.warning { background: #FEF3C7; color: #92400E; }
+  .issue-label.info { background: #DBEAFE; color: #1E40AF; }
+
+  /* Code block */
+  .code-block {
+    background: #1E1E1C;
+    border-radius: 10px;
+    padding: 20px;
+    overflow-x: auto;
+    margin-top: 12px;
+  }
+
+  .code-block pre {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    line-height: 1.7;
+    color: #D4D4C8;
+    white-space: pre;
+  }
+
+  .code-block .comment { color: #6A9955; }
+  .code-block .key { color: #9CDCFE; }
+  .code-block .string { color: #CE9178; }
+  .code-block .type { color: #4EC9B0; }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .summary-grid { grid-template-columns: 1fr; }
+    .cat-cards { grid-template-columns: 1fr; }
+    .field-row { grid-template-columns: 1fr; gap: 2px; }
+    .report-header h1 { font-size: 24px; }
+    .monthly-table { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="report-header">
+    <div class="meta">BeMe Observations · Academic Year 2025–26</div>
+    <h1>Monthly Observation Report: Venbha P</h1>
+    <div class="subtitle">Covering June 2025 – March 2026 across 5 observation categories. Includes data quality analysis and standardization recommendations for scaling to 60 students.</div>
+  </div>
+
+  <!-- Summary -->
+  <div class="section">
+    <h2>Overview</h2>
+    <p class="section-desc">Key metrics from the current academic year observation log.</p>
+    <div class="summary-grid">
+      <div class="stat-card">
+        <div class="stat-label">Total Observations</div>
+        <div class="stat-value">294</div>
+        <div class="stat-detail">9 months tracked</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Active Observers</div>
+        <div class="stat-value">8</div>
+        <div class="stat-detail">Mayuri & Nilima lead (91%)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Media Attached</div>
+        <div class="stat-value">97%</div>
+        <div class="stat-detail">286 of 294 have Drive links</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category Breakdown -->
+  <div class="section">
+    <h2>The 5 Categories</h2>
+    <p class="section-desc">Each observation is tagged with one or more categories. 69% of entries carry multiple tags, showing the interconnected nature of learning.</p>
+
+    <div class="category-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--accent-learning)"></div> Learning (188)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--accent-self)"></div> Self (143)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--accent-skills)"></div> Skills (130)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--accent-relationships)"></div> Relationships (118)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--accent-community)"></div> Community (59)</div>
+    </div>
+
+    <div class="cat-cards">
+      <div class="cat-card learning">
+        <h3>Learning</h3>
+        <div class="cat-count" style="color:var(--accent-learning)">188</div>
+        <div class="cat-pct">29% of all tags</div>
+        <div class="cat-desc">Worksheets, science experiments, counting, number writing, art projects, reading, nature exploration, vocabulary building.</div>
+      </div>
+      <div class="cat-card self">
+        <h3>Self</h3>
+        <div class="cat-count" style="color:var(--accent-self)">143</div>
+        <div class="cat-pct">22% of all tags</div>
+        <div class="cat-desc">Independence, self-regulation, reflection journals, goal setting, decision-making, emotional awareness, focus and patience.</div>
+      </div>
+      <div class="cat-card skills">
+        <h3>Skills</h3>
+        <div class="cat-count" style="color:var(--accent-skills)">130</div>
+        <div class="cat-pct">20% of all tags</div>
+        <div class="cat-desc">Motor skills, craft techniques (cutting, threading), cooking abilities, balancing, tool use, scissor proficiency, dance moves.</div>
+      </div>
+      <div class="cat-card relationships">
+        <h3>Relationships</h3>
+        <div class="cat-count" style="color:var(--accent-relationships)">118</div>
+        <div class="cat-pct">18% of all tags</div>
+        <div class="cat-desc">Peer interaction, sharing, helping others, conflict resolution, friendships with Myra/Aadya, cooperative play, group activities.</div>
+      </div>
+      <div class="cat-card community">
+        <h3>Community</h3>
+        <div class="cat-count" style="color:var(--accent-community)">59</div>
+        <div class="cat-pct">9% of all tags</div>
+        <div class="cat-desc">Committee work, sakha meetings, closing circles, Onam/Ganesha celebrations, resource management, group responsibility.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Monthly Breakdown Table -->
+  <div class="section">
+    <h2>Monthly Breakdown</h2>
+    <p class="section-desc">Category distribution by month. Bar width shows relative volume.</p>
+
+    <table class="monthly-table">
+      <thead>
+        <tr>
+          <th style="width:100px">Month</th>
+          <th>Total</th>
+          <th style="width:50px">L</th>
+          <th style="width:50px">Sk</th>
+          <th style="width:50px">Se</th>
+          <th style="width:50px">R</th>
+          <th style="width:50px">C</th>
+          <th style="width:240px">Distribution</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="month-name">Jun 2025</td>
+          <td class="total-badge">41</td>
+          <td class="count-badge">21</td>
+          <td class="count-badge">18</td>
+          <td class="count-badge">4</td>
+          <td class="count-badge">9</td>
+          <td class="count-badge">2</td>
+          <td class="bar-cell"><div class="bar-container">
+            <div class="bar-segment" style="flex:21;background:var(--accent-learning)" title="Learning: 21"></div>
+            <div class="bar-segment" style="flex:18;background:var(--accent-skills)" title="Skills: 18"></div>
+            <div class="bar-segment" style="flex:4;background:var(--accent-self)" title="Self: 4"></div>
+            <div class="bar-segment" style="flex:9;background:var(--accent-relationships)" title="Relationships: 9"></div>
+            <div class="bar-segment" style="flex:2;background:var(--accent-community)" title="Community: 2"></div>
+          </div></td>
+        </tr>
+        <tr>
+          <td class="month-name">Jul 2025</td>
+          <td class="total-badge">77</td>
+          <td class="count-badge">45</td>
+          <td class="count-badge">28</td>
+          <td class="count-badge">25</td>
+          <td class="count-badge">26</td>
+          <td class="count-badge">10</td>
+          <td class="bar-cell"><div class="bar-container">
+            <div class="bar-segment" style="flex:45;background:var(--accent-learning)"></div>
+            <div class="bar-segment" style="flex:28;background:var(--accent-skills)"></div>
+            <div class="bar-segment" style="flex:25;background:var(--accent-self)"></div>
+            <div class="bar-segment" style="flex:26;background:var(--accent-relationships)"></div>
+            <div class="bar-segment" style="flex:10;background:var(--accent-community)"></div>
+          </div></td>
+        </tr>
+        <tr>
+          <td class="month-name">Aug 2025</td>
+          <td class="total-badge">35</td>
+          <td class="count-badge">22</td>
+          <td class="count-badge">13</td>
+          <td class="count-badge">12</td>
+          <td class="count-badge">20</td>
+          <td class="count-badge">5</td>
+          <td class="bar-cell"><div class="bar-container">
+            <div class="bar-segment" style="flex:22;background:var(--accent-learning)"></div>
+            <div class="bar-segment" style="flex:13;background:var(--accent-skills)"></div>
+            <div class="bar-segment" style="flex:12;background:var(--accent-self)"></div>
+            <div class="bar-segment" style="flex:20;background:var(--accent-relationships)"></div>
+            <div class="bar-segment" style="flex:5;background:var(--accent-community)"></div>
+          </div></td>
+        </tr>
+        <tr>
+          <td class="month-name">Sep 2025</td>
+          <td class="total-badge">49</td>
+          <td class="count-badge">36</td>
+          <td class="count-badge">19</td>
+          <td class="count-badge">23</td>
+          <td class="count-badge">28</td>
+          <td class="count-badge">10</td>
+          <td class="bar-cell"><div class="bar-container">
+            <div class="bar-segment" style="flex:36;background:var(--accent-learning)"></div>
+            <div class="bar-segment" style="flex:19;background:var(--accent-skills)"></div>
+            <div class="bar-segment" style="flex:23;background:var(--accent-self)"></div>
+            <div class="bar-segment" style="flex:28;background:var(--accent-relationships)"></div>
+            <div class="bar-segment" style="flex:10;background:var(--accent-community)"></div>
+          </div></td>
+        </tr>
+        <tr>
+          <td class="month-name">Oct 2025</td>
+          <td class="total-badge">17</td>
+          <td class="count-badge">10</td>
+          <td class="count-badge">10</td>
+          <td class="count-badge">13</td>
+          <td class="count-badge">8</td>
+          <td class="count-badge">2</td>
+          <td class="bar-cell"><div class="bar-container">
+            <div class="bar-segment" style="flex:10;background:var(--accent-learning)"></div>
+            <div class="bar-segment" style="flex:10;background:var(--accent-skills)"></div>
+            <div class="bar-segment" style="flex:13;background:var(--accent-self)"></div>
+            <div class="bar-segment" style="flex:8;background:var(--accent-relationships)"></div>
+            <div class="bar-segment" style="flex:2;background:var(--accent-community)"></div>
+          </div></td>
+        </tr>
+        <tr>
+          <td class="month-name">Nov 2025</td>
+          <td class="total-badge">35</td>
+          <td class="count-badge">26</td>
+          <td class="count-badge">24</td>
+          <td class="count-badge">32</td>
+          <td class="count-badge">4</td>
+          <td class="count-badge">22</td>
+          <td class="bar-cell"><div class="bar-container">
+            <div class="bar-segment" style="flex:26;background:var(--accent-learning)"></div>
+            <div class="bar-segment" style="flex:24;background:var(--accent-skills)"></div>
+            <div class="bar-segment" style="flex:32;background:var(--accent-self)"></div>
+            <div class="bar-segment" style="flex:4;background:var(--accent-relationships)"></div>
+            <div class="bar-segment" style="flex:22;background:var(--accent-community)"></div>
+          </div></td>
+        </tr>
+        <tr>
+          <td class="month-name">Jan 2026</td>
+          <td class="total-badge">22</td>
+          <td class="count-badge">11</td>
+          <td class="count-badge">7</td>
+          <td class="count-badge">18</td>
+          <td class="count-badge">11</td>
+          <td class="count-badge">7</td>
+          <td class="bar-cell"><div class="bar-container">
+            <div class="bar-segment" style="flex:11;background:var(--accent-learning)"></div>
+            <div class="bar-segment" style="flex:7;background:var(--accent-skills)"></div>
+            <div class="bar-segment" style="flex:18;background:var(--accent-self)"></div>
+            <div class="bar-segment" style="flex:11;background:var(--accent-relationships)"></div>
+            <div class="bar-segment" style="flex:7;background:var(--accent-community)"></div>
+          </div></td>
+        </tr>
+        <tr>
+          <td class="month-name">Feb 2026</td>
+          <td class="total-badge">17</td>
+          <td class="count-badge">16</td>
+          <td class="count-badge">10</td>
+          <td class="count-badge">15</td>
+          <td class="count-badge">12</td>
+          <td class="count-badge">1</td>
+          <td class="bar-cell"><div class="bar-container">
+            <div class="bar-segment" style="flex:16;background:var(--accent-learning)"></div>
+            <div class="bar-segment" style="flex:10;background:var(--accent-skills)"></div>
+            <div class="bar-segment" style="flex:15;background:var(--accent-self)"></div>
+            <div class="bar-segment" style="flex:12;background:var(--accent-relationships)"></div>
+            <div class="bar-segment" style="flex:1;background:var(--accent-community)"></div>
+          </div></td>
+        </tr>
+        <tr>
+          <td class="month-name">Mar 2026</td>
+          <td class="total-badge">1</td>
+          <td class="count-badge">1</td>
+          <td class="count-badge">1</td>
+          <td class="count-badge">1</td>
+          <td class="count-badge">0</td>
+          <td class="count-badge">0</td>
+          <td class="bar-cell"><div class="bar-container">
+            <div class="bar-segment" style="flex:1;background:var(--accent-learning)"></div>
+            <div class="bar-segment" style="flex:1;background:var(--accent-skills)"></div>
+            <div class="bar-segment" style="flex:1;background:var(--accent-self)"></div>
+          </div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Observer Distribution -->
+  <div class="section">
+    <h2>Observer Distribution</h2>
+    <p class="section-desc">Who is contributing observations. Two facilitators account for 91% of all entries.</p>
+    <div class="observer-grid">
+      <div class="observer-card">
+        <div class="name">Mayuri Rai</div>
+        <div class="count">136</div>
+        <div class="label">observations (46%)</div>
+      </div>
+      <div class="observer-card">
+        <div class="name">Nilima</div>
+        <div class="count">130</div>
+        <div class="label">observations (44%)</div>
+      </div>
+      <div class="observer-card">
+        <div class="name">Keerthi</div>
+        <div class="count">7</div>
+        <div class="label">observations</div>
+      </div>
+      <div class="observer-card">
+        <div class="name">Rashmi Majhi</div>
+        <div class="count">6</div>
+        <div class="label">observations</div>
+      </div>
+      <div class="observer-card">
+        <div class="name">Deepika</div>
+        <div class="count">5</div>
+        <div class="label">observations</div>
+      </div>
+      <div class="observer-card">
+        <div class="name">Others</div>
+        <div class="count">8</div>
+        <div class="label">Antara, Prakash, Mayuri</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Data Quality Issues -->
+  <div class="section">
+    <h2>Data Quality Issues Found</h2>
+    <p class="section-desc">Issues that will compound when you scale to 60 students. Fixing these now saves you a massive cleanup later.</p>
+
+    <ul class="issue-list">
+      <li>
+        <span class="issue-label critical">Critical</span>
+        <strong>Inconsistent date formats.</strong> Three different formats found: <code>11 Jun 2025 11:16 AM</code> (most entries), <code>11.9.25</code> (dot-separated shorthand), and Python <code>datetime</code> objects. Some rows have no date at all. At 60× scale this will break any automated reporting.
+      </li>
+      <li>
+        <span class="issue-label critical">Critical</span>
+        <strong>Categories are freeform, space-separated text.</strong> "Learning Skills Self Relationships" is stored as a single text string. No delimiter consistency — you can't tell if "Self Learning" is 1 category or 2. Some entries use "General" as a 6th category not in the official 5.
+      </li>
+      <li>
+        <span class="issue-label warning">Warning</span>
+        <strong>Observer name inconsistency.</strong> "Mayuri Rai" and "Mayuri" (no last name) appear as separate entries. "Mayuri" (4 entries) uses different date formats too, suggesting a different data entry path.
+      </li>
+      <li>
+        <span class="issue-label warning">Warning</span>
+        <strong>No child identifier column.</strong> The child's name only appears in the filename. If you're scaling to 60 students sharing the same schema, you need <code>child_id</code> and <code>child_name</code> as explicit columns.
+      </li>
+      <li>
+        <span class="issue-label warning">Warning</span>
+        <strong>Mixed content types in one sheet.</strong> The spreadsheet has 12 sheets mixing observation logs, semester reviews, individual plans, goal setting, and parent participation reports. These are structurally different data types sharing one file.
+      </li>
+      <li>
+        <span class="issue-label info">Info</span>
+        <strong>9 entries have no category tags.</strong> 3% of observations are uncategorized — small now, but at 60× that's ~500 untagged entries per year.
+      </li>
+      <li>
+        <span class="issue-label info">Info</span>
+        <strong>Some observations lack meaningful text.</strong> Entries like "Lunch time", "Closing time", "Play time" offer no developmental context. Consider a minimum observation detail standard.
+      </li>
+    </ul>
+  </div>
+
+  <!-- Standardization Recommendation -->
+  <div class="section">
+    <h2>Recommended Schema for 60 Students</h2>
+    <p class="section-desc">Separate the 4 data types into distinct sheets/tables with strict column formats. This is your source-of-truth structure.</p>
+
+    <!-- Schema 1: Observations -->
+    <div class="schema-block">
+      <div class="schema-header">1. Observations (daily log — the core table)</div>
+      <div class="schema-body">
+        <div class="field-row">
+          <span class="field-name">observation_id</span>
+          <span class="field-type">TEXT</span>
+          <span class="field-desc">Auto-generated unique ID, e.g. <code>OBS-2025-0001</code></span>
+        </div>
+        <div class="field-row">
+          <span class="field-name">child_id</span>
+          <span class="field-type">TEXT</span>
+          <span class="field-desc">Stable identifier for the child, e.g. <code>VENBHA-P</code></span>
+        </div>
+        <div class="field-row">
+          <span class="field-name">date</span>
+          <span class="field-type">DATE</span>
+          <span class="field-desc">ISO 8601 format: <code>2025-07-09</code>. No time component — that's metadata noise.</span>
+        </div>
+        <div class="field-row">
+          <span class="field-name">observer</span>
+          <span class="field-type">TEXT</span>
+          <span class="field-desc">Full name from a controlled list (dropdown). No free-text entry.</span>
+        </div>
+        <div class="field-row">
+          <span class="field-name">observation</span>
+          <span class="field-type">TEXT</span>
+          <span class="field-desc">Free-text narrative. Minimum 10 words recommended.</span>
+        </div>
+        <div class="field-row">
+          <span class="field-name">cat_learning</span>
+          <span class="field-type">BOOLEAN</span>
+          <span class="field-desc">TRUE/FALSE — one column per category. No ambiguity.</span>
+        </div>
+        <div class="field-row">
+          <span class="field-name">cat_skills</span>
+          <span class="field-type">BOOLEAN</span>
+          <span class="field-desc">TRUE/FALSE</span>
+        </div>
+        <div class="field-row">
+          <span class="field-name">cat_self</span>
+          <span class="field-type">BOOLEAN</span>
+          <span class="field-desc">TRUE/FALSE</span>
+        </div>
+        <div class="field-row">
+          <span class="field-name">cat_relationships</span>
+          <span class="field-type">BOOLEAN</span>
+          <span class="field-desc">TRUE/FALSE</span>
+        </div>
+        <div class="field-row">
+          <span class="field-name">cat_community</span>
+          <span class="field-type">BOOLEAN</span>
+          <span class="field-desc">TRUE/FALSE</span>
+        </div>
+        <div class="field-row">
+          <span class="field-name">media_url</span>
+          <span class="field-type">URL</span>
+          <span class="field-desc">Google Drive link. Optional.</span>
+        </div>
+        <div class="field-row">
+          <span class="field-name">academic_year</span>
+          <span class="field-type">TEXT</span>
+          <span class="field-desc">E.g. <code>2025-26</code>. Enables cross-year queries.</span>
+        </div>
+        <div class="field-row">
+          <span class="field-name">semester</span>
+          <span class="field-type">INT</span>
+          <span class="field-desc">1 or 2</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Schema 2: Semester Reviews -->
+    <div class="schema-block">
+      <div class="schema-header">2. Semester Reviews (periodic review meetings)</div>
+      <div class="schema-body">
+        <div class="field-row">
+          <span class="field-name">review_id</span>
+          <span class="field-type">TEXT</span>
+          <span class="field-desc">E.g. <code>REV-VENBHA-2025-S2</code></span>
+        </div>
+        <div class="field-row">
+          <span class="field-name">child_id</span>
+          <span class="field-type">TEXT</span>
+          <span class="field-desc">Links to child master</span>
+        </div>
+        <div class="field-row">
+          <span class="field-name">date</span>
+          <span class="field-type">DATE</span>
+          <span class="field-desc">Review meeting date</span>
+        </div>
+        <div class="field-row">
+          <span class="field-name">attendees</span>
+          <span class="field-type">TEXT</span>
+          <span class="field-desc">Comma-separated names</span>
+        </div>
+        <div class="field-row">
+          <span class="field-name">speaker</span>
+          <span class="field-type">TEXT</span>
+          <span class="field-desc">Who said this (Parent / Facilitator / Child)</span>
+        </div>
+        <div class="field-row">
+          <span class="field-name">comment</span>
+          <span class="field-type">TEXT</span>
+          <span class="field-desc">The actual note / feedback</span>
+        </div>
+        <div class="field-row">
+          <span class="field-name">type</span>
+          <span class="field-type">ENUM</span>
+          <span class="field-desc">observation | concern | action_item | appreciation</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Schema 3: Goals -->
+    <div class="schema-block">
+      <div class="schema-header">3. Individual Plans & Goals (per-semester)</div>
+      <div class="schema-body">
+        <div class="field-row">
+          <span class="field-name">child_id</span>
+          <span class="field-type">TEXT</span>
+          <span class="field-desc">Links to child master</span>
+        </div>
+        <div class="field-row">
+          <span class="field-name">academic_year</span>
+          <span class="field-type">TEXT</span>
+          <span class="field-desc">E.g. <code>2025-26</code></span>
+        </div>
+        <div class="field-row">
+          <span class="field-name">semester</span>
+          <span class="field-type">INT</span>
+          <span class="field-desc">1 or 2</span>
+        </div>
+        <div class="field-row">
+          <span class="field-name">goal_area</span>
+          <span class="field-type">ENUM</span>
+          <span class="field-desc">activities | new_learning | community | social | physical | projects</span>
+        </div>
+        <div class="field-row">
+          <span class="field-name">goal_text</span>
+          <span class="field-type">TEXT</span>
+          <span class="field-desc">What the child wants to do</span>
+        </div>
+        <div class="field-row">
+          <span class="field-name">status</span>
+          <span class="field-type">ENUM</span>
+          <span class="field-desc">not_started | in_progress | completed | carried_forward</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Schema 4: Children -->
+    <div class="schema-block">
+      <div class="schema-header">4. Children Master (reference table)</div>
+      <div class="schema-body">
+        <div class="field-row">
+          <span class="field-name">child_id</span>
+          <span class="field-type">TEXT</span>
+          <span class="field-desc">Primary key. E.g. <code>VENBHA-P</code></span>
+        </div>
+        <div class="field-row">
+          <span class="field-name">full_name</span>
+          <span class="field-type">TEXT</span>
+          <span class="field-desc">Full display name</span>
+        </div>
+        <div class="field-row">
+          <span class="field-name">sakha_group</span>
+          <span class="field-type">TEXT</span>
+          <span class="field-desc">E.g. Rosie Ferrari, Caterpillars</span>
+        </div>
+        <div class="field-row">
+          <span class="field-name">homeroom</span>
+          <span class="field-type">TEXT</span>
+          <span class="field-desc">Homeroom assignment</span>
+        </div>
+        <div class="field-row">
+          <span class="field-name">parent_names</span>
+          <span class="field-type">TEXT</span>
+          <span class="field-desc">E.g. Prabhu G, Sujindra V</span>
+        </div>
+        <div class="field-row">
+          <span class="field-name">enrollment_date</span>
+          <span class="field-type">DATE</span>
+          <span class="field-desc">When they joined BeMe</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Implementation -->
+  <div class="section">
+    <h2>Implementation Strategy</h2>
+    <p class="section-desc">How to get from 60 messy spreadsheets to a clean, queryable system.</p>
+
+    <ul class="issue-list">
+      <li>
+        <span class="issue-label info">Step 1</span>
+        <strong>Create a Google Sheets template</strong> with data validation on every column — date pickers for dates, dropdowns for observers and categories (checkboxes, not freetext), and a child_id auto-populated from the filename. Lock the header row.
+      </li>
+      <li>
+        <span class="issue-label info">Step 2</span>
+        <strong>Separate sheet tabs by data type.</strong> One tab for daily observations, one for semester reviews, one for goals. Don't mix them. The current file has 12 tabs because different data types got dumped into one spreadsheet over time.
+      </li>
+      <li>
+        <span class="issue-label info">Step 3</span>
+        <strong>Build a consolidation pipeline.</strong> A Python script (or Apps Script) that reads all 60 student sheets and merges them into a single master observations table. This is where you get cross-student analysis, observer workload tracking, and category coverage reports.
+      </li>
+      <li>
+        <span class="issue-label info">Step 4</span>
+        <strong>Drop "General" as a category.</strong> It's being used as a catch-all for entries that don't fit the 5 categories (sakha meetings, lunch, dance electives). Either define what "General" means or force observers to pick from the 5 real categories.
+      </li>
+      <li>
+        <span class="issue-label info">Step 5</span>
+        <strong>Set observation quality guidelines.</strong> Minimum 10 words per observation. Encourage the "what happened + what it shows" pattern — e.g. not just "Lunch time" but "During lunch, Venbha shared her food with Aadya without being asked, showing growing empathy."
+      </li>
+    </ul>
+  </div>
+
+  <div style="margin-top:48px; padding-top:24px; border-top:1px solid var(--border); font-size:12px; color:var(--text-muted);">
+    Generated April 2026 · Source: BeMe_Observations_Venbha-P.xlsx · Sheet1 (2025-26 academic year)
+  </div>
+
+</div>
+</body>
+</html>
