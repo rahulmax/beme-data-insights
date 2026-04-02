@@ -359,25 +359,12 @@ function DepthChart() {
 }
 
 // ──── MAIN ────
-export default function Page() {
+export function DeepInsights() {
   const [tab, setTab] = useState(0);
 
   return (
-    <div style={{ fontFamily: "'DM Sans', -apple-system, sans-serif", background: C.bg, minHeight: "100vh", color: C.text }}>
-      <div style={{ maxWidth: 720, margin: "0 auto", padding: "28px 20px 80px" }}>
-
-        <div style={{ marginBottom: 24 }}>
-          <div style={{ fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: C.muted, fontWeight: 600, marginBottom: 4 }}>
-            Deep Analysis · 565 Observations · 3 Years
-          </div>
-          <h1 style={{ fontSize: 24, fontWeight: 700, fontFamily: "Georgia, serif", lineHeight: 1.2, marginBottom: 6 }}>
-            Venbha: Quantitative Insights
-          </h1>
-          <p style={{ fontSize: 13, color: C.sec, lineHeight: 1.6 }}>
-            Beyond narrative — what the numbers, patterns, and gaps reveal about her exploration, 
-            her relationships, and the observation system itself.
-          </p>
-        </div>
+    <div style={{ fontFamily: "'DM Sans', -apple-system, sans-serif", background: C.bg, color: C.text }}>
+      <div style={{ maxWidth: 720, margin: "0 auto", padding: "24px 20px 80px" }}>
 
         <div style={{ display: "flex", gap: 3, marginBottom: 24, background: C.surface, border: `1px solid ${C.border}`, borderRadius: 10, padding: 3, overflowX: "auto" }}>
           {tabs.map((t, i) => (

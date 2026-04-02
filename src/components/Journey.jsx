@@ -306,25 +306,12 @@ function MistakeCard({ m, idx }) {
 }
 
 // ──── MAIN ────
-export default function Page() {
+export function Journey() {
   const [tab, setTab] = useState(0);
 
   return (
-    <div style={{ fontFamily: "'DM Sans', -apple-system, sans-serif", background: C.bg, minHeight: "100vh", color: C.text }}>
-      <div style={{ maxWidth: 720, margin: "0 auto", padding: "32px 20px 80px" }}>
-
-        <div style={{ marginBottom: 28 }}>
-          <div style={{ fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: C.muted, fontWeight: 600, marginBottom: 6 }}>
-            BeMe Observation Report · 2023–2026
-          </div>
-          <h1 style={{ fontSize: 26, fontWeight: 700, fontFamily: "Georgia, serif", lineHeight: 1.2, marginBottom: 8 }}>
-            Venbha's Learning Journey
-          </h1>
-          <p style={{ fontSize: 13, color: C.sec, lineHeight: 1.6 }}>
-            A celebration of 3 years of self-directed exploration. Synthesized from 565 observations, 
-            5 semester reviews, and Venbha's own goals — across all 12 sheets in her observation record.
-          </p>
-        </div>
+    <div style={{ fontFamily: "'DM Sans', -apple-system, sans-serif", background: C.bg, color: C.text }}>
+      <div style={{ maxWidth: 720, margin: "0 auto", padding: "24px 20px 80px" }}>
 
         {/* Tabs */}
         <div style={{ display: "flex", gap: 3, marginBottom: 28, background: C.surface, border: `1px solid ${C.border}`, borderRadius: 10, padding: 3 }}>

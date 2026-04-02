@@ -1,91 +1,70 @@
-import Link from 'next/link'
+'use client'
+// @ts-nocheck
 
-const reports = [
-  {
-    title: 'Generic Observation Report',
-    description: 'Monthly observation report with data quality analysis and standardization recommendations',
-    href: '/generic',
-    tag: 'Overview',
-  },
-  {
-    title: 'Level 1 — Parent Report',
-    description: 'Developmental report synthesized from 565 observations, growth timeline, interests, and goal alignment',
-    href: '/level-1',
-    tag: 'Level 1',
-  },
-  {
-    title: 'Level 2 — Learning Journey',
-    description: 'Philosophy-aligned journey report with facilitator windows, AI pipeline, and language guidelines',
-    href: '/level-2',
-    tag: 'Level 2',
-  },
-  {
-    title: 'Level 3 — Quantitative Insights',
-    description: 'Deep analysis with exploration maps, velocity trends, peer networks, observer blind spots, and action items',
-    href: '/level-3',
-    tag: 'Level 3',
-  },
-  {
-    title: 'Behavioural Analysis',
-    description: 'Deep behavioural arc tracking emotional regulation, social confidence, self-direction, and physical confidence over 3 years',
-    href: '/behavioural',
-    tag: 'Behavioural',
-  },
+import { useState } from 'react'
+import { Journey } from '@/components/Journey'
+import { Behavioural } from '@/components/Behavioural'
+import { DeepInsights } from '@/components/DeepInsights'
+
+const tabs = [
+  { key: 'journey', label: 'Learning Journey' },
+  { key: 'behavioural', label: 'Behavioural Arc' },
+  { key: 'insights', label: 'Deep Insights' },
+  { key: 'data', label: 'Observation Data' },
 ]
 
 export default function Home() {
+  const [active, setActive] = useState('journey')
+
   return (
     <div style={{ fontFamily: "'DM Sans', -apple-system, sans-serif", background: '#FAFAF8', minHeight: '100vh', color: '#1A1A18' }}>
-      <div style={{ maxWidth: 720, margin: '0 auto', padding: '48px 20px 80px' }}>
-        <div style={{ marginBottom: 40 }}>
-          <div style={{ fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#9B9890', fontWeight: 600, marginBottom: 8 }}>
+      {/* Top nav */}
+      <div style={{ borderBottom: '1px solid #E8E6E1', background: '#FFFFFF', position: 'sticky', top: 0, zIndex: 10 }}>
+        <div style={{ maxWidth: 720, margin: '0 auto', padding: '16px 20px 0' }}>
+          <div style={{ fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#9B9890', fontWeight: 600, marginBottom: 4 }}>
             BeMe Learning Community · 2023–2026
           </div>
-          <h1 style={{ fontSize: 28, fontWeight: 700, fontFamily: 'Georgia, serif', lineHeight: 1.2, marginBottom: 10 }}>
+          <h1 style={{ fontSize: 22, fontWeight: 700, fontFamily: 'Georgia, serif', lineHeight: 1.2, marginBottom: 14 }}>
             Venbha&apos;s Data Insights
           </h1>
-          <p style={{ fontSize: 14, color: '#6B6960', lineHeight: 1.6 }}>
-            A collection of observation reports and data analyses synthesized from 565 observations
-            across 3 academic years, 5 semester reviews, and self-set goals.
-          </p>
+          <div style={{ display: 'flex', gap: 0, overflowX: 'auto' }}>
+            {tabs.map((t) => (
+              <button
+                key={t.key}
+                onClick={() => setActive(t.key)}
+                style={{
+                  padding: '10px 16px',
+                  border: 'none',
+                  borderBottom: active === t.key ? '2px solid #1A1A18' : '2px solid transparent',
+                  background: 'transparent',
+                  cursor: 'pointer',
+                  fontSize: 13,
+                  fontWeight: active === t.key ? 700 : 500,
+                  fontFamily: 'inherit',
+                  color: active === t.key ? '#1A1A18' : '#9B9890',
+                  whiteSpace: 'nowrap',
+                  transition: 'all 0.15s',
+                }}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
         </div>
+      </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-          {reports.map((report) => (
-            <Link
-              key={report.href}
-              href={report.href}
-              style={{
-                background: '#FFFFFF',
-                border: '1px solid #E8E6E1',
-                borderRadius: 10,
-                padding: '20px 24px',
-                textDecoration: 'none',
-                color: 'inherit',
-                transition: 'border-color 0.2s, box-shadow 0.2s',
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
-                <span style={{
-                  fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em',
-                  padding: '3px 10px', borderRadius: 6, background: '#EFF6FF', color: '#2563EB',
-                }}>
-                  {report.tag}
-                </span>
-              </div>
-              <div style={{ fontSize: 17, fontWeight: 700, fontFamily: 'Georgia, serif', marginBottom: 4 }}>
-                {report.title}
-              </div>
-              <div style={{ fontSize: 13, color: '#6B6960', lineHeight: 1.5 }}>
-                {report.description}
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        <div style={{ marginTop: 48, paddingTop: 20, borderTop: '1px solid #E8E6E1', fontSize: 11, color: '#9B9890' }}>
-          Generated April 2026 · Source: BeMe_Observations_Venbha-P.xlsx
-        </div>
+      {/* Content */}
+      <div>
+        {active === 'journey' && <Journey />}
+        {active === 'behavioural' && <Behavioural />}
+        {active === 'insights' && <DeepInsights />}
+        {active === 'data' && (
+          <iframe
+            src="/observation-report.html"
+            style={{ width: '100%', height: 'calc(100vh - 120px)', border: 'none' }}
+            title="Observation Data"
+          />
+        )}
       </div>
     </div>
   )
