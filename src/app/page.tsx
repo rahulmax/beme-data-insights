@@ -5,11 +5,13 @@ import { useState } from 'react'
 import { Journey } from '@/components/Journey'
 import { Behavioural } from '@/components/Behavioural'
 import { DeepInsights } from '@/components/DeepInsights'
+import { Comprehensive } from '@/components/Comprehensive'
 
 const tabs = [
   { key: 'journey', label: 'Learning Journey' },
   { key: 'behavioural', label: 'Behavioural Arc' },
   { key: 'insights', label: 'Deep Insights' },
+  { key: 'comprehensive', label: 'Comprehensive' },
   { key: 'data', label: 'Observation Data' },
 ]
 
@@ -20,7 +22,7 @@ export default function Home() {
     <div style={{ fontFamily: "'DM Sans', -apple-system, sans-serif", background: '#FAFAF8', minHeight: '100vh', color: '#1A1A18' }}>
       {/* Top nav */}
       <div style={{ borderBottom: '1px solid #E8E6E1', background: '#FFFFFF', position: 'sticky', top: 0, zIndex: 10 }}>
-        <div style={{ maxWidth: 720, margin: '0 auto', padding: '16px 20px 0' }}>
+        <div style={{ maxWidth: 960, margin: '0 auto', padding: '16px 20px 0' }}>
           <div style={{ fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#9B9890', fontWeight: 600, marginBottom: 4 }}>
             BeMe Learning Community · 2023–2026
           </div>
@@ -58,6 +60,7 @@ export default function Home() {
         {active === 'journey' && <Journey />}
         {active === 'behavioural' && <Behavioural />}
         {active === 'insights' && <DeepInsights />}
+        {active === 'comprehensive' && <Comprehensive />}
         {active === 'data' && (
           <iframe
             src="/observation-report.html"

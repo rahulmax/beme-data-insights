@@ -451,17 +451,19 @@ export function Behavioural() {
 
   return (
     <div style={{ fontFamily: "'DM Sans', -apple-system, sans-serif", background: C.bg, color: C.text }}>
-      <div style={{ maxWidth: 720, margin: "0 auto", padding: "24px 20px 80px" }}>
+      <div style={{ maxWidth: 960, margin: "0 auto", padding: "24px 20px 80px" }}>
 
-        <div style={{ display: "flex", gap: 3, marginBottom: 24, background: C.surface, border: `1px solid ${C.border}`, borderRadius: 10, padding: 3, overflowX: "auto" }}>
-          {tabs.map((t, i) => (
-            <button key={t} onClick={() => setTab(i)} style={{
-              flex: "0 0 auto", padding: "9px 14px", border: "none", borderRadius: 8, cursor: "pointer",
-              fontSize: 12, fontWeight: 600, fontFamily: "inherit", whiteSpace: "nowrap",
-              background: tab === i ? C.text : "transparent",
-              color: tab === i ? "#fff" : C.sec,
-            }}>{t}</button>
-          ))}
+        <div style={{ position: "sticky", top: 119, zIndex: 9, background: "#FAFAF8", paddingTop: 8, paddingBottom: 8, marginLeft: -20, marginRight: -20, paddingLeft: 20, paddingRight: 20 }}>
+          <div style={{ display: "flex", gap: 3, background: C.surface, border: `1px solid ${C.border}`, borderRadius: 10, padding: 3, overflowX: "auto" }}>
+            {tabs.map((t, i) => (
+              <button key={t} onClick={() => setTab(i)} style={{
+                flex: "0 0 auto", padding: "9px 14px", border: "none", borderRadius: 8, cursor: "pointer",
+                fontSize: 12, fontWeight: 600, fontFamily: "inherit", whiteSpace: "nowrap",
+                background: tab === i ? C.text : "transparent",
+                color: tab === i ? "#fff" : C.sec,
+              }}>{t}</button>
+            ))}
+          </div>
         </div>
 
         {tab === 0 && <BehavioralArc />}

@@ -311,19 +311,21 @@ export function Journey() {
 
   return (
     <div style={{ fontFamily: "'DM Sans', -apple-system, sans-serif", background: C.bg, color: C.text }}>
-      <div style={{ maxWidth: 720, margin: "0 auto", padding: "24px 20px 80px" }}>
+      <div style={{ maxWidth: 960, margin: "0 auto", padding: "24px 20px 80px" }}>
 
         {/* Tabs */}
-        <div style={{ display: "flex", gap: 3, marginBottom: 28, background: C.surface, border: `1px solid ${C.border}`, borderRadius: 10, padding: 3 }}>
-          {tabs.map((t, i) => (
-            <button key={t} onClick={() => setTab(i)} style={{
-              flex: 1, padding: "10px 12px", border: "none", borderRadius: 8, cursor: "pointer",
-              fontSize: 12, fontWeight: 600, fontFamily: "inherit",
-              background: tab === i ? C.text : "transparent",
-              color: tab === i ? "#fff" : C.sec,
-              transition: "all 0.15s",
-            }}>{t}</button>
-          ))}
+        <div style={{ position: "sticky", top: 119, zIndex: 9, background: "#FAFAF8", paddingTop: 8, paddingBottom: 8, marginLeft: -20, marginRight: -20, paddingLeft: 20, paddingRight: 20 }}>
+          <div style={{ display: "flex", gap: 3, background: C.surface, border: `1px solid ${C.border}`, borderRadius: 10, padding: 3 }}>
+            {tabs.map((t, i) => (
+              <button key={t} onClick={() => setTab(i)} style={{
+                flex: 1, padding: "10px 12px", border: "none", borderRadius: 8, cursor: "pointer",
+                fontSize: 12, fontWeight: 600, fontFamily: "inherit",
+                background: tab === i ? C.text : "transparent",
+                color: tab === i ? "#fff" : C.sec,
+                transition: "all 0.15s",
+              }}>{t}</button>
+            ))}
+          </div>
         </div>
 
         {/* ──── TAB 1: Parent Report ──── */}
